@@ -220,5 +220,6 @@ npm run dev
 - Implement retry mechanism for failed API calls
 - Add end-to-end tests
 
-## Screen recording on app
-![Page](https://res.cloudinary.com/dcpfdxsly/video/upload/v1740327154/code-test-fs-ts-video-recording_kw6orp.mov)
+## Demo
+
+[![Watch the Screen Recording](https://res.cloudinary.com/dcpfdxsly/image/upload/v1740327779/ezgif-25f32c9fcc4a59_xwjt8j.gif)](https://res.cloudinary.com/dcpfdxsly/video/upload/v1740327154/code-test-fs-ts-video-recording_kw6orp.mov)
