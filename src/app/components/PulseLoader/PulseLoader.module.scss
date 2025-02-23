@@ -1,0 +1,108 @@
+// Container that covers the entire viewport
+.loaderContainer {
+  position: fixed;  // Fixed position to cover entire screen
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;  // Center the loader
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  z-index: 1000;  // Ensure loader appears above other content
+ }
+ 
+ // Wrapper for the pulse animation
+ .pulseLoader {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+ 
+ // Base circles configuration
+ .pulse {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: #e5f1cc;  // Lightest green for outer circle
+  border-radius: 50%;
+ 
+  // Middle circle using pseudo-element
+  &::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #d1e5a4;  // Medium green for middle circle
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  // Center the circle
+  }
+ 
+  // Inner circle using pseudo-element
+  &::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #80b900;  // Darkest green for inner circle
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  // Center the circle
+  }
+ }
+ 
+ // Animation configuration for all circles
+ .pulse {
+  // Middle circle animation
+  &::before {
+    animation: pulseMiddle 1s ease-out infinite;
+  }
+ 
+  // Inner circle animation
+  &::after {
+    animation: pulseInner 2s ease-out infinite;
+  }
+ 
+  // Outer circle animation
+  animation: pulseOuter 3s ease-out infinite;
+ }
+ 
+ // Keyframe animations for each circle
+ @keyframes pulseOuter {
+  0% {
+    transform: scale(1);  // Start at normal size
+    opacity: 1;
+  }
+  50%, 100% {
+    transform: scale(1.5);  // Scale up to 150%
+    opacity: 0.8;  // Fade slightly
+  }
+ }
+ 
+ @keyframes pulseMiddle {
+  0% {
+    transform: translate(-50%, -50%) scale(1);  // Start centered at normal size
+    opacity: 1;
+  }
+  50%, 100% {
+    transform: translate(-50%, -50%) scale(1.5);  // Scale up to 150%
+    opacity: 0.8;  // Fade slightly
+  }
+ }
+ 
+ @keyframes pulseInner {
+  0% {
+    transform: translate(-50%, -50%) scale(1);  // Start centered at normal size
+    opacity: 1;
+  }
+  50%, 100% {
+    transform: translate(-50%, -50%) scale(1.2);  // Scale up to 120%
+    opacity: 1; 
+  }
+ }
