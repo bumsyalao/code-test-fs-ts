@@ -1,7 +1,6 @@
 "use client"
-
 import { useEffect, useState } from 'react';
-import styles from './PulseLoader.module.scss';
+import styles from './pulseLoader.module.scss';
 
 
 interface PulseLoaderProps {
@@ -12,10 +11,10 @@ interface PulseLoaderProps {
 }
 
 
-export const PulseLoader: React.FC<PulseLoaderProps> = ({ 
+export const PulseLoader: React.FC<PulseLoaderProps> = ({
   onLoadingComplete,
   // Default duration of 3000ms (3 seconds) if not specified
-  duration = 3000 
+  duration = 3000
 }) => {
 
   const [isVisible, setIsVisible] = useState(true);
@@ -39,7 +38,9 @@ export const PulseLoader: React.FC<PulseLoaderProps> = ({
   return (
     <div className={styles.loaderContainer}>
       <div className={styles.pulseLoader}>
-        <div className={styles.pulse}></div>
+        <div className={styles.outerCircle}></div>  {/* Outer pulsating circle */}
+        <div className={styles.middleCircle}></div> {/* Middle pulsating circle */}
+        <div className={styles.innerCircle}></div>  {/* Static inner circle */}
       </div>
     </div>
   );

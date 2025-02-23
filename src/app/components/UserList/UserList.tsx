@@ -1,7 +1,8 @@
 "use client"
-
 import { useEffect, useState, useRef, useCallback } from 'react';
-import styles from './UserList.module.scss';
+import Image from 'next/image';
+import "react-toastify/dist/ReactToastify.css";
+import styles from './userList.module.scss';
 
 // Define the structure of a User object
 interface User {
@@ -28,6 +29,8 @@ export const UserList: React.FC<UserListProps> = ({ isLoading }) => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   // Reference to the div used as the observer target for infinite scrolling
   const observerTarget = useRef<HTMLDivElement>(null);
+  // Prevents hydration mismatch
+  const [hydrated, setHydrated] = useState(false);
 
   /**
    * Fetches user data from the API based on the given page number.
@@ -38,7 +41,7 @@ export const UserList: React.FC<UserListProps> = ({ isLoading }) => {
       setIsLoadingMore(true);
       const response = await fetch(`https://reqres.in/api/users?page=${pageNum}`);
       const data = await response.json();
-      
+
       if (pageNum === 1) {
         // If it's the first page, replace existing users
         setUsers(data.data);
@@ -46,11 +49,12 @@ export const UserList: React.FC<UserListProps> = ({ isLoading }) => {
         // Append new users to the existing list
         setUsers(prev => [...prev, ...data.data]);
       }
-      
+
       // Check if there are more pages to load
       setHasMore(data.page < data.total_pages);
     } catch (error) {
       console.error('Error fetching users:', error);
+
     } finally {
       setIsLoadingMore(false);
     }
@@ -68,6 +72,13 @@ export const UserList: React.FC<UserListProps> = ({ isLoading }) => {
     }
   }, [hasMore, isLoadingMore, isLoading]);
 
+  /**
+   * Ensures this state update happens only on the client,
+   * Prevent hydration mismatch by delaying rendering until after the component has mounted.
+   */
+  useEffect(() => {
+    setHydrated(true); // Ensures this runs only on the client
+  }, []);
   /**
    * Sets up an IntersectionObserver to trigger loading more users when the user scrolls to the bottom.
    */
@@ -92,24 +103,24 @@ export const UserList: React.FC<UserListProps> = ({ isLoading }) => {
     if (!isLoading) {
       fetchUsers(page);
     }
-  }, [page, isLoading]);
+  }, [page, isLoading, hydrated]);
 
   // If the initial loading is still active, do not render the user list
-  if (isLoading) return null;
+  if (isLoading && !hydrated) return null;
 
   return (
     <div className={styles.userList}>
       {/* Render the list of users */}
       {users.map(user => (
         <div key={user.id} className={styles.userCard}>
-          <img src={user.avatar} alt={`${user.first_name} ${user.last_name}`} />
+          <Image src={user.avatar} width={60} height={60} alt={`${user.first_name} ${user.last_name}`} />
           <div className={styles.userInfo}>
             <h3>{`${user.first_name} ${user.last_name}`}</h3>
             <p>{user.email}</p>
           </div>
         </div>
       ))}
-      
+
       {/* Placeholder for lazy loading trigger */}
       <div ref={observerTarget} className={styles.loadingTrigger}>
         {isLoadingMore && <p>Loading more...</p>}

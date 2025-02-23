@@ -1,5 +1,4 @@
-"use client" // Enables client-side rendering in Next.js
-
+"use client"
 import { useState } from 'react';
 import { PulseLoader } from './components/PulseLoader/PulseLoader';
 import { UserList } from './components/UserList/UserList';
