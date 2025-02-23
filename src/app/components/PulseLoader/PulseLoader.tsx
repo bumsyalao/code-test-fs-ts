@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from 'react';
-import styles from './pulseLoader.module.scss';
+import styles from './PulseLoader.module.scss';
 
 
 interface PulseLoaderProps {

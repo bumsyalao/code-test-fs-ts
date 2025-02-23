@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import "react-toastify/dist/ReactToastify.css";
-import styles from './userList.module.scss';
+import styles from './UserList.module.scss';
 
 // Define the structure of a User object
 interface User {

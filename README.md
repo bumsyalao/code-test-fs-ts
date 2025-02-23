@@ -1,5 +1,5 @@
 # Code-test Solution
-[View App]("https://code-test-fs-ts.vercel.app/")
+[View App](https://code-test-fs-ts.vercel.app/)
 
 This is a web application built with Next.js to show user data fetching with an elegant loading animation.
 
@@ -219,3 +219,6 @@ npm run dev
 - Add loading state skeletons
 - Implement retry mechanism for failed API calls
 - Add end-to-end tests
+
+## Screen recording on app
+![Page](https://res.cloudinary.com/dcpfdxsly/video/upload/v1740327154/code-test-fs-ts-video-recording_kw6orp.mov)
