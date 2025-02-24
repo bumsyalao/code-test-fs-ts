@@ -199,10 +199,11 @@ npm run dev
 │   └── PulseLoader/
 │       ├── PulseLoader.tsx
 │       └── PulseLoader.module.scss
-├── pages/
-│   └── index.tsx
-└── styles/
-    └── globals.scss
+│   └── UserList/
+│       ├── UserList.tsx
+│       └── UserList.module.scss
+├── page.tsx
+├── page.module.scss
 ```
 
 ## Performance Considerations
